@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,13 +19,24 @@ namespace LanPartyClient
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
             MainWindowViewModel viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
             InitializeComponent();
+        }
+
+        private void ShowSettings(object sender, RoutedEventArgs e)
+        {
+            var flyout = this.Flyouts.Items[0] as Flyout;
+            if (flyout == null)
+            {
+                return;
+            }
+
+            flyout.IsOpen = !flyout.IsOpen;
         }
     }
 }

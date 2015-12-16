@@ -1,27 +1,43 @@
 ﻿using LanPartyClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace LanPartyServer
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private Model model;
-
         public MainWindowViewModel()
         {
-            this.model = Model.Instance;
-            this.startCmd = new StartCommand();
+
         }
 
-        private StartCommand startCmd;
-        public StartCommand StartCmd
+        private Player selectedPlayer;
+        public Player SelectedPlayer
         {
-            get { return this.startCmd; }
-            set { this.startCmd = value; }
+            get { return selectedPlayer; }
+            set { selectedPlayer = value; }
         }
+
+        private ListCollectionView players;
+        public ListCollectionView Players
+        {
+            get { return players; }
+            set { players = value; }
+        }
+
+        private Game selectedGame;
+        public Game SelectedGame
+        {
+            get { return selectedGame; }
+            set { selectedGame = value; }
+        }
+
+        private ListCollectionView games;
+        public ListCollectionView Games
+        {
+            get { return games; }
+            set { games = value; }
+        }
+
+        private TCPServerModule tcpModule;
     }
 }

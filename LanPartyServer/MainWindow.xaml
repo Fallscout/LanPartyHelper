@@ -1,17 +1,112 @@
-﻿<Window x:Class="LanPartyServer.MainWindow"
+﻿<Controls:MetroWindow x:Class="LanPartyServer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Server">
-                <MenuItem Header="Start" Command="{Binding StartCmd}"/>
-                <MenuItem Header="Kick Player" />
-            </MenuItem>
-            <MenuItem Header="Game">
-                <MenuItem Header="Start Vote" />
-            </MenuItem>
-        </Menu>
-        <StackPanel></StackPanel>
-    </DockPanel>
-</Window>
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="LanParty Server"
+        ShowTitleBar="False"
+        MinHeight="600"
+        MinWidth="1000"
+                      
+        BorderThickness="2"
+        GlowBrush="{DynamicResource AccentColorBrush}" 
+                      
+        LeftWindowCommandsOverlayBehavior="Never"
+                      
+        WindowStartupLocation="CenterScreen">
+    
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Settings" Click="ShowSettings" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
+    
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Header="Settings" Position="Left" Width="300">
+
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    
+    <Grid Margin="0, 25, 0, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="350" Height="2*" />
+            <RowDefinition MinHeight="20" Height="20" />
+            <RowDefinition MinHeight="200" Height="1*" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="350" Width="2*"/>
+                <ColumnDefinition MinWidth="20" Width="20" />
+                <ColumnDefinition MinWidth="900" Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Row="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Hostname" />
+                    <DataGridTextColumn Header="Nickname" />
+                    <DataGridTextColumn Header="IP-Address" />
+                    <DataGridTextColumn Header="Subnetmask" />
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="1" Background="Gray"/>
+            
+            <Controls:MetroAnimatedTabControl Grid.Column="2">
+                <TabItem Header="General" Controls:ControlsHelper.HeaderFontSize="18">
+                            
+                </TabItem>
+                <TabItem Header="System" Controls:ControlsHelper.HeaderFontSize="18">
+                            
+                </TabItem>
+                <TabItem Header="Misc" Controls:ControlsHelper.HeaderFontSize="18">
+                            
+                </TabItem>
+            </Controls:MetroAnimatedTabControl>
+        </Grid>
+
+        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="1" Background="Gray"/>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <RichTextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" Background="Black" BorderThickness="0, 1, 1, 0" Focusable="False"></RichTextBox>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="C:\Users\ce>" Background="Black" Padding="10, 0, 0, 0" />
+                <TextBox Grid.Row="1" Grid.Column="1" Background="Black" BorderBrush="Gray" BorderThickness="0, 0, 1, 0">
+                </TextBox>
+            </Grid>
+            
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Controls:ToggleSwitch Grid.Row="0" Grid.Column="0" Header="Server" Width="100"/>
+                <Controls:ToggleSwitch Grid.Row="0" Grid.Column="1" Header="Control" Width="100"/>
+                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="0" Header="Control" Width="100"/>
+                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="1" Header="Control" Width="100"/>
+                <Controls:ToggleSwitch Grid.Row="2" Grid.Column="0" Header="Control" Width="100"/>
+                <Controls:ToggleSwitch Grid.Row="2" Grid.Column="1" Header="Control" Width="100"/>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</Controls:MetroWindow>
