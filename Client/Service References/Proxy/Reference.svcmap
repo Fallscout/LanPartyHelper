@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e0265dfc-e4b9-493f-9996-2909ee234602" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:3745/LanPartyUtility" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="LanPartyUtility.disco" MetadataType="Disco" ID="38fb1a8d-c3d3-4b63-9049-dd1ae38b2dbe" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?disco" />
+    <MetadataFile FileName="LanPartyUtility.xsd" MetadataType="Schema" ID="de82a73a-8fba-4d00-a83f-5b643a69804c" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?xsd=xsd1" />
+    <MetadataFile FileName="LanPartyUtility1.xsd" MetadataType="Schema" ID="29ace813-a248-49d8-be7f-0bc0dce8926b" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?xsd=xsd0" />
+    <MetadataFile FileName="LanPartyUtility2.xsd" MetadataType="Schema" ID="cf53809f-e5b7-4b45-b623-513ec7431e3c" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?xsd=xsd2" />
+    <MetadataFile FileName="LobbyManagerService.wsdl" MetadataType="Wsdl" ID="510c7ee1-5117-4337-928b-61c1d58ded07" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
