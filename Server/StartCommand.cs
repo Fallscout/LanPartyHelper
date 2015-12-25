@@ -28,25 +28,26 @@ namespace LanPartyUtility.Server
 
         public void Execute(object parameter)
         {
-
-            Uri baseAddress = new Uri("http://localhost:3745/LanPartyUtility");
+            Uri baseAddress = new Uri("net.tcp://localhost:3745/LanPartyUtility");
 
             this.viewModel.LobbyManagerHost = new ServiceHost(typeof(LobbyManagerService), baseAddress);
 
             try
             {
-                this.viewModel.LobbyManagerHost.AddServiceEndpoint(typeof(ILobbyManager), new WSHttpBinding(), "LobbyManagerService");
+                this.viewModel.LobbyManagerHost.AddServiceEndpoint(typeof(ILobbyManager), new NetTcpBinding(), "LobbyManagerService");
 
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
                 smb.HttpGetEnabled = true;
+                smb.HttpGetUrl = new Uri("http://localhost:8000/LanPartyUtility");
                 smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
                 this.viewModel.LobbyManagerHost.Description.Behaviors.Add(smb);
 
-                viewModel.LobbyManagerHost.Open();
+                this.viewModel.LobbyManagerHost.Open();
+                this.viewModel.IsLobbyManagerOnline = true;
             }
             catch (CommunicationException e)
             {
-                viewModel.LobbyManagerHost.Abort();
+                this.viewModel.LobbyManagerHost.Abort();
             }
         }
     }

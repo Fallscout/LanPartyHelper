@@ -1,18 +1,17 @@
-﻿using LanPartyUtility.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace LanPartyUtility.Server
+namespace LanPartyUtility.Client
 {
-    public class StopCommand : ICommand
+    public class DisconnectCommand : ICommand
     {
         private MainWindowViewModel viewModel;
 
-        public StopCommand(MainWindowViewModel viewModel)
+        public DisconnectCommand(MainWindowViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
@@ -20,17 +19,15 @@ namespace LanPartyUtility.Server
         public bool CanExecute(object parameter)
         {
             return true;
+            //return this.viewModel.IsConnected == true;
         }
 
         public event EventHandler CanExecuteChanged;
 
         public void Execute(object parameter)
         {
-            this.viewModel.LobbyManagerHost.Close();
-
-            this.viewModel.IsLobbyManagerOnline = false;
-            this.viewModel.Players.Clear();
-            LobbyManagerService.Channels.Clear();
+            this.viewModel.LobbyClient.Disconnect(this.viewModel.Self.Id);
+            this.viewModel.IsConnected = false;
         }
     }
 }

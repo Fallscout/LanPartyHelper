@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e0265dfc-e4b9-493f-9996-2909ee234602" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="86bb7d08-9fa8-4e3f-9e28-4c212cc2bb45" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:3745/LanPartyUtility" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8000/LanPartyUtility" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="LanPartyUtility.disco" MetadataType="Disco" ID="38fb1a8d-c3d3-4b63-9049-dd1ae38b2dbe" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?disco" />
-    <MetadataFile FileName="LanPartyUtility.xsd" MetadataType="Schema" ID="de82a73a-8fba-4d00-a83f-5b643a69804c" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?xsd=xsd1" />
-    <MetadataFile FileName="LanPartyUtility1.xsd" MetadataType="Schema" ID="29ace813-a248-49d8-be7f-0bc0dce8926b" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?xsd=xsd0" />
-    <MetadataFile FileName="LanPartyUtility2.xsd" MetadataType="Schema" ID="cf53809f-e5b7-4b45-b623-513ec7431e3c" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?xsd=xsd2" />
-    <MetadataFile FileName="LobbyManagerService.wsdl" MetadataType="Wsdl" ID="510c7ee1-5117-4337-928b-61c1d58ded07" SourceId="1" SourceUrl="http://localhost:3745/LanPartyUtility?wsdl" />
+    <MetadataFile FileName="LanPartyUtility.xsd" MetadataType="Schema" ID="2aa121ed-23c7-48fb-9ed1-823a330d83a2" SourceId="1" SourceUrl="http://localhost:8000/LanPartyUtility?xsd=xsd2" />
+    <MetadataFile FileName="LanPartyUtility1.xsd" MetadataType="Schema" ID="d1e26d96-752c-4d33-9ad0-fea98fb2208d" SourceId="1" SourceUrl="http://localhost:8000/LanPartyUtility?xsd=xsd1" />
+    <MetadataFile FileName="LanPartyUtility2.xsd" MetadataType="Schema" ID="dc5fc6d9-deb6-477f-bdc8-f1c29a53ea84" SourceId="1" SourceUrl="http://localhost:8000/LanPartyUtility?xsd=xsd0" />
+    <MetadataFile FileName="LanPartyUtility.wsdl" MetadataType="Wsdl" ID="35b899c3-f266-4bdb-a95d-c336b040e1ee" SourceId="1" SourceUrl="http://localhost:8000/LanPartyUtility?wsdl=wsdl0" />
+    <MetadataFile FileName="LobbyManagerService.wsdl" MetadataType="Wsdl" ID="d97fba92-ef70-40ae-914c-d89cd8c963d5" SourceId="1" SourceUrl="http://localhost:8000/LanPartyUtility" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

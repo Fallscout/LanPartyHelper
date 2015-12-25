@@ -12,20 +12,27 @@ namespace LanPartyUtility.Client.Proxy {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Proxy.ILobbyManager")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://fallscout.com", ConfigurationName="Proxy.ILobbyManager", CallbackContract=typeof(LanPartyUtility.Client.Proxy.ILobbyManagerCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface ILobbyManager {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/Connect", ReplyAction="http://tempuri.org/ILobbyManager/ConnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://fallscout.com/ILobbyManager/Connect", ReplyAction="http://fallscout.com/ILobbyManager/ConnectResponse")]
         int Connect(LanPartyUtility.Common.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/Connect", ReplyAction="http://tempuri.org/ILobbyManager/ConnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://fallscout.com/ILobbyManager/Connect", ReplyAction="http://fallscout.com/ILobbyManager/ConnectResponse")]
         System.Threading.Tasks.Task<int> ConnectAsync(LanPartyUtility.Common.Player player);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/Disconnect", ReplyAction="http://tempuri.org/ILobbyManager/DisconnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://fallscout.com/ILobbyManager/Disconnect")]
         void Disconnect(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILobbyManager/Disconnect", ReplyAction="http://tempuri.org/ILobbyManager/DisconnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://fallscout.com/ILobbyManager/Disconnect")]
         System.Threading.Tasks.Task DisconnectAsync(int id);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ILobbyManagerCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://fallscout.com/ILobbyManager/RefreshPlayerList")]
+        void RefreshPlayerList(LanPartyUtility.Common.Player[] players);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -34,25 +41,26 @@ namespace LanPartyUtility.Client.Proxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LobbyManagerClient : System.ServiceModel.ClientBase<LanPartyUtility.Client.Proxy.ILobbyManager>, LanPartyUtility.Client.Proxy.ILobbyManager {
+    public partial class LobbyManagerClient : System.ServiceModel.DuplexClientBase<LanPartyUtility.Client.Proxy.ILobbyManager>, LanPartyUtility.Client.Proxy.ILobbyManager {
         
-        public LobbyManagerClient() {
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public LobbyManagerClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public LobbyManagerClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public LobbyManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public LobbyManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public LobbyManagerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public int Connect(LanPartyUtility.Common.Player player) {

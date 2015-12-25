@@ -1,28 +1,42 @@
 ﻿using LanPartyUtility.Client.Proxy;
-using LanPartyUtility.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LanPartyUtility.Client
 {
     public class ConnectCommand : ICommand
     {
+        private MainWindowViewModel viewModel;
+
+        public ConnectCommand(MainWindowViewModel viewModel)
+        {
+            this.viewModel = viewModel;
+        }
+
         public bool CanExecute(object parameter)
         {
             return true;
+            //return this.viewModel.IsConnected == false;
         }
 
         public event EventHandler CanExecuteChanged;
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
-            LobbyManagerClient client = new LobbyManagerClient();
+            this.viewModel.LobbyClient = new LobbyManagerClient(new InstanceContext(new LobbyManagerCallback()));
 
-            client.Connect(new Player("CE01", "Chris", "127.0.0.1", "255.255.255.0"));
+            await Task.Run(() =>
+            {
+                this.viewModel.Self.Id = this.viewModel.LobbyClient.Connect(this.viewModel.Self);
+            });
+
+            this.viewModel.IsConnected = true;
         }
     }
 }

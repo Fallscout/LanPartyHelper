@@ -41,13 +41,7 @@
                 <ColumnDefinition MinWidth="20" Width="20" />
                 <ColumnDefinition MinWidth="900" Width="3*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Row="0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Hostname" />
-                    <DataGridTextColumn Header="Nickname" />
-                    <DataGridTextColumn Header="IP-Address" />
-                    <DataGridTextColumn Header="Subnetmask" />
-                </DataGrid.Columns>
+            <DataGrid Grid.Row="0" ItemsSource="{Binding Players}">
             </DataGrid>
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="1" Background="LightGray"/>
@@ -95,12 +89,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" Content="Connect" Width="100" Command="{Binding ConnectCmd}"/>
-                <Controls:ToggleSwitch Grid.Row="0" Grid.Column="1" Header="Control" Width="100"/>
-                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="0" Header="Control" Width="100"/>
-                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="1" Header="Control" Width="100"/>
-                <Controls:ToggleSwitch Grid.Row="2" Grid.Column="0" Header="Control" Width="100"/>
-                <Controls:ToggleSwitch Grid.Row="2" Grid.Column="1" Header="Control" Width="100"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="Connect" Width="80" Height="35" Command="{Binding ConnectCmd}"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="Disconnect" Width="80" Height="35" Command="{Binding DisconnectCmd}"/>
+                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="0" Header="Control" Width="140"/>
+                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="1" Header="Control" Width="140"/>
+                <Controls:ToggleSwitch Grid.Row="2" Grid.Column="0" Header="Control" Width="140"/>
+                <Controls:ToggleSwitch Grid.Row="2" Grid.Column="1" Header="Control" Width="140"/>
             </Grid>
         </Grid>
     </Grid>

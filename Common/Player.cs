@@ -5,10 +5,10 @@ namespace LanPartyUtility.Common
     [DataContract]
     public class Player
     {
-        public Player(string hostname, string nickname, string ipAddress, string subnetmask)
+        public Player(string hostname, string ipAddress, string subnetmask)
         {
+            this.id = -1;
             this.hostname = hostname;
-            this.nickname = nickname;
             this.ipAddress = ipAddress;
             this.subnetmask = subnetmask;
         }

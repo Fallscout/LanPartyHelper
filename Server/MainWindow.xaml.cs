@@ -26,6 +26,7 @@ namespace LanPartyUtility.Server
         public MainWindow()
         {
             viewModel = new MainWindowViewModel();
+            this.Closing += viewModel.OnWindowClosing;
             this.DataContext = viewModel;
             InitializeComponent();
         }

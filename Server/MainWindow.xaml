@@ -93,9 +93,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Controls:ToggleSwitch Grid.Row="0" Grid.Column="0" Header="Server" Width="100" IsChecked="{Binding IsLobbyManagerOnline}"/>
-                <Controls:ToggleSwitch Grid.Row="0" Grid.Column="1" Header="Control" Width="100"/>
-                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="0" Header="Control" Width="100"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="Start" Width="80" Height="35" Command="{Binding StartCmd}"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="Stop" Width="80" Height="35" Command="{Binding StopCmd}"/>
+                <Controls:ToggleSwitch Grid.Row="1" Grid.Column="0" Header="Control" Width="100" IsChecked="{Binding IsLobbyManagerOnline}"/>
                 <Controls:ToggleSwitch Grid.Row="1" Grid.Column="1" Header="Control" Width="100"/>
                 <Controls:ToggleSwitch Grid.Row="2" Grid.Column="0" Header="Control" Width="100"/>
                 <Controls:ToggleSwitch Grid.Row="2" Grid.Column="1" Header="Control" Width="100"/>

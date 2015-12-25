@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -13,23 +14,19 @@ namespace LanPartyUtility.Server
     {
         public MainWindowViewModel()
         {
-            this.selectedPlayer = null;
-            this.players = new ListCollectionView(new ObservableCollection<Player>());
-
-            this.selectedGame = null;
-            this.games = new ListCollectionView(new ObservableCollection<Game>());
+            this.isLobbyManagerOnline = false;
+            this.LobbyManagerHost = null;
 
             this.StartCmd = new StartCommand(this);
             this.StopCmd = new StopCommand(this);
-
-            this.isLobbyManagerOnline = false;
-
-            LobbyManagerService.PlayerConnected += lobbyManager_PlayerConnected;
         }
 
-        void lobbyManager_PlayerConnected(object sender, LobbyEventArgs e)
+        public void OnWindowClosing(object sender, EventArgs e)
         {
-            Players.AddNewItem(e.NewPlayer);
+            if (this.IsLobbyManagerOnline)
+            {
+                this.StopCmd.Execute(null);
+            }
         }
 
         private bool isLobbyManagerOnline;
@@ -40,61 +37,22 @@ namespace LanPartyUtility.Server
             {
                 this.isLobbyManagerOnline = value;
                 OnPropertyChanged("IsLobbyManagerOnline");
-
-                if (this.isLobbyManagerOnline == true)
-                {
-                    this.StartCmd.Execute(null);
-                }
-                else
-                {
-                    this.StopCmd.Execute(null);
-                }
             }
         }
 
         public ServiceHost LobbyManagerHost { get; set; }
 
-        private Player selectedPlayer;
-        public Player SelectedPlayer
+        public ObservableCollection<Player> Players
         {
-            get { return selectedPlayer; }
-            set 
-            { 
-                selectedPlayer = value;
-                OnPropertyChanged("SelectedPlayer");
-            }
-        }
-
-        private ListCollectionView players;
-        public ListCollectionView Players
-        {
-            get { return players; }
+            get { return LobbyManagerService.Players; }
             set
             {
-                players = value;
+                LobbyManagerService.Players = value;
                 OnPropertyChanged("Players");
             }
         }
 
-        private Game selectedGame;
-        public Game SelectedGame
-        {
-            get { return selectedGame; }
-            set 
-            { 
-                selectedGame = value;
-                OnPropertyChanged("SelectedGame");
-            }
-        }
-
-        private ListCollectionView games;
-        public ListCollectionView Games
-        {
-            get { return games; }
-            set { games = value; }
-        }
-
-        public StartCommand StartCmd { get; private set; }
-        public StopCommand StopCmd { get; private set; }
+        public ICommand StartCmd { get; private set; }
+        public ICommand StopCmd { get; private set; }
     }
 }
