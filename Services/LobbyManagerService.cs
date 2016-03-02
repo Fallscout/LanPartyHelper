@@ -3,26 +3,65 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.ServiceModel.Description;
 
 namespace LanPartyUtility.Services
 {
+    public delegate void PlayerConnectedEventHandler(object sender, LobbyManagerEventArgs args);
+    public delegate void PlayerDisconnectedEventHandler(object sender, LobbyManagerEventArgs args);
 
     public class LobbyManagerService : ILobbyManager
     {
+        public static ServiceHost Host { get; private set; }
         public static int PlayerCount { get; set; }
         public static ObservableCollection<Player> Players { get; set; }
-        public static List<ILobbyManagerCallback> Channels { get; set; }
+        public static Dictionary<string, ILobbyManagerCallback> Channels { get; set; }
+
+        public static event PlayerConnectedEventHandler PlayerConnected;
+        public static event PlayerDisconnectedEventHandler PlayerDisconnected;
 
         static LobbyManagerService()
         {
+            Host = new ServiceHost(typeof(LobbyManagerService), new Uri("net.tcp://localhost:3745/LanPartyUtility"));
+            Host.AddServiceEndpoint(typeof(ILobbyManager), new NetTcpBinding(), "LobbyManagerService");
+
+            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+            smb.HttpGetEnabled = true;
+            smb.HttpGetUrl = new Uri("http://localhost:8000/LanPartyUtility");
+            smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
+            Host.Description.Behaviors.Add(smb);
+
+            Host.Closing += Host_Closing;
+
             PlayerCount = 0;
             Players = new ObservableCollection<Player>();
-            Channels = new List<ILobbyManagerCallback>();
+            Channels = new Dictionary<string, ILobbyManagerCallback>();
+        }
+
+        static void Host_Closing(object sender, EventArgs e)
+        {
+            Players.Clear();
+            PlayerCount = 0;
+            Channels.Clear();
+        }
+
+        protected virtual void OnPlayerConnected(LobbyManagerEventArgs args)
+        {
+            var handler = PlayerConnected;
+            if (handler != null)
+            {
+                handler(this, args);
+            }
+        }
+
+        protected virtual void OnPlayerDisconnected(LobbyManagerEventArgs args)
+        {
+            var handler = PlayerDisconnected;
+            if (handler != null)
+            {
+                handler(this, args);
+            }
         }
 
         public int Connect(Player player)
@@ -36,23 +75,24 @@ namespace LanPartyUtility.Services
                 throw new InvalidOperationException(String.Format("IP-Address {0} is already in use.", player.IPAddress));
             }
 
-            PlayerCount += 1;
-            player.Id = PlayerCount;
+            player.Id = ++PlayerCount;
             Players.Add(player);
 
-            Channels.Add(OperationContext.Current.GetCallbackChannel<ILobbyManagerCallback>());
+            Channels.Add(player.IPAddress, OperationContext.Current.GetCallbackChannel<ILobbyManagerCallback>());
 
-            foreach (ILobbyManagerCallback channel in Channels)
+            foreach (var channel in Channels)
             {
                 try
                 {
-                    channel.RefreshPlayerList(Players);
+                    channel.Value.RefreshPlayerList(Players);
                 }
-                catch (CommunicationObjectAbortedException ex)
+                catch (CommunicationObjectAbortedException)
                 {
-                    Channels.Remove(channel);
+                    Channels.Remove(channel.Key);
                 }
             }
+
+            OnPlayerConnected(new LobbyManagerEventArgs(player));
 
             return PlayerCount;
         }
@@ -67,10 +107,12 @@ namespace LanPartyUtility.Services
             {
                 Players.Remove(player);
 
-                foreach (ILobbyManagerCallback channel in Channels)
+                foreach (var channel in Channels)
                 {
-                    channel.RefreshPlayerList(Players);
+                    channel.Value.RefreshPlayerList(Players);
                 }
+
+                OnPlayerDisconnected(new LobbyManagerEventArgs(player));
             }
         }
     }

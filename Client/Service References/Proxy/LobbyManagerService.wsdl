@@ -59,6 +59,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ScanDirectory">
+      <soap12:operation soapAction="http://fallscout.com/ILobbyManager/ScanDirectory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="LobbyManagerService">
     <wsdl:port name="NetTcpBinding_ILobbyManager" binding="tns:NetTcpBinding_ILobbyManager">
@@ -66,7 +75,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:3745/LanPartyUtility/LobbyManagerService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>CE01\Christoph Emunds</Upn>
+          <Upn>CE@team4.de</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

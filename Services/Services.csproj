@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILobbyManager.cs" />
+    <Compile Include="LobbyManagerEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LobbyManagerService.cs" />
   </ItemGroup>

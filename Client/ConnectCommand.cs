@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,10 +32,7 @@ namespace LanPartyUtility.Client
         {
             this.viewModel.LobbyClient = new LobbyManagerClient(new InstanceContext(new LobbyManagerCallback()));
 
-            await Task.Run(() =>
-            {
-                this.viewModel.Self.Id = this.viewModel.LobbyClient.Connect(this.viewModel.Self);
-            });
+            this.viewModel.Self.Id = await this.viewModel.LobbyClient.ConnectAsync(this.viewModel.Self);
 
             this.viewModel.IsConnected = true;
         }

@@ -1,5 +1,5 @@
-﻿
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+
 namespace LanPartyUtility.Common
 {
     [DataContract]
@@ -12,6 +12,8 @@ namespace LanPartyUtility.Common
             this.ipAddress = ipAddress;
             this.subnetmask = subnetmask;
         }
+
+        public Player() { }
 
         [DataMember]
         private int id;

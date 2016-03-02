@@ -1,7 +1,9 @@
 ﻿using LanPartyUtility.Common;
 using LanPartyUtility.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Threading.Tasks;
@@ -15,10 +17,24 @@ namespace LanPartyUtility.Server
         public MainWindowViewModel()
         {
             this.isLobbyManagerOnline = false;
-            this.LobbyManagerHost = null;
+
+            LobbyManagerService.PlayerConnected += LobbyManagerService_PlayerConnected;
+            LobbyManagerService.PlayerDisconnected += LobbyManagerService_PlayerDisconnected;
 
             this.StartCmd = new StartCommand(this);
             this.StopCmd = new StopCommand(this);
+        }
+
+        void LobbyManagerService_PlayerDisconnected(object sender, LobbyManagerEventArgs args)
+        {
+            this.Terminal.WriteLine(String.Format("[{0}] {1} ({2}) disconnected", DateTime.Now.ToLongTimeString(),
+                args.Player.Nickname, args.Player.Hostname));
+        }
+
+        void LobbyManagerService_PlayerConnected(object sender, LobbyManagerEventArgs args)
+        {
+            this.Terminal.WriteLine(String.Format("[{0}] {1} ({2}) connected with IP-Address: {3}", DateTime.Now.ToLongTimeString(),
+                args.Player.Nickname, args.Player.Hostname, args.Player.IPAddress));
         }
 
         public void OnWindowClosing(object sender, EventArgs e)
@@ -40,7 +56,16 @@ namespace LanPartyUtility.Server
             }
         }
 
-        public ServiceHost LobbyManagerHost { get; set; }
+        private Player selectedPlayer;
+        public Player SelectedPlayer
+        {
+            get { return this.selectedPlayer; }
+            set
+            {
+                this.selectedPlayer = value;
+                OnPropertyChanged("SelectedPlayer");
+            }
+        }
 
         public ObservableCollection<Player> Players
         {
@@ -51,6 +76,8 @@ namespace LanPartyUtility.Server
                 OnPropertyChanged("Players");
             }
         }
+
+        public ServerTerminal Terminal { get; set; }
 
         public ICommand StartCmd { get; private set; }
         public ICommand StopCmd { get; private set; }

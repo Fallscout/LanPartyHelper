@@ -26,11 +26,9 @@ namespace LanPartyUtility.Server
 
         public void Execute(object parameter)
         {
-            this.viewModel.LobbyManagerHost.Close();
+            LobbyManagerService.Host.Close();
 
             this.viewModel.IsLobbyManagerOnline = false;
-            this.viewModel.Players.Clear();
-            LobbyManagerService.Channels.Clear();
         }
     }
 }

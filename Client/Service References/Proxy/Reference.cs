@@ -33,6 +33,9 @@ namespace LanPartyUtility.Client.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://fallscout.com/ILobbyManager/RefreshPlayerList")]
         void RefreshPlayerList(LanPartyUtility.Common.Player[] players);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://fallscout.com/ILobbyManager/ScanDirectory", ReplyAction="http://fallscout.com/ILobbyManager/ScanDirectoryResponse")]
+        string ScanDirectory();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

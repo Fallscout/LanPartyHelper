@@ -19,6 +19,12 @@
   <wsdl:message name="ILobbyManager_RefreshPlayerList_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RefreshPlayerList" />
   </wsdl:message>
+  <wsdl:message name="ILobbyManager_ScanDirectory_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ScanDirectory" />
+  </wsdl:message>
+  <wsdl:message name="ILobbyManager_ScanDirectory_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ScanDirectoryResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="ILobbyManager">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Connect">
       <wsdl:input wsam:Action="http://fallscout.com/ILobbyManager/Connect" message="tns:ILobbyManager_Connect_InputMessage" />
@@ -29,6 +35,10 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RefreshPlayerList">
       <wsdl:output wsam:Action="http://fallscout.com/ILobbyManager/RefreshPlayerList" message="tns:ILobbyManager_RefreshPlayerList_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ScanDirectory">
+      <wsdl:output wsam:Action="http://fallscout.com/ILobbyManager/ScanDirectory" message="tns:ILobbyManager_ScanDirectory_OutputCallbackMessage" />
+      <wsdl:input wsam:Action="http://fallscout.com/ILobbyManager/ScanDirectoryResponse" message="tns:ILobbyManager_ScanDirectory_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

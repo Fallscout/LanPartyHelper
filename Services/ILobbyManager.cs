@@ -24,5 +24,8 @@ namespace LanPartyUtility.Services
     {
         [OperationContract(IsOneWay=true)]
         void RefreshPlayerList(ObservableCollection<Player> players);
+
+        [OperationContract]
+        string ScanDirectory();
     }
 }

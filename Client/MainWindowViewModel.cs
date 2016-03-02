@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,7 +18,7 @@ namespace LanPartyUtility.Client
         {
             #region Instantiate Player
 
-            string ip = String.Empty;
+            this.self = new Player();
 
             NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
             foreach (NetworkInterface inter in interfaces)
@@ -25,11 +26,12 @@ namespace LanPartyUtility.Client
                 IPInterfaceProperties prop = inter.GetIPProperties();
                 if (prop.GatewayAddresses.Count > 0 && prop.DnsAddresses.Count > 0)
                 {
-                    ip = prop.DnsAddresses[0].ToString();
+                    this.self.IPAddress = prop.UnicastAddresses[1].Address.ToString();
+                    this.self.Subnetmask = prop.UnicastAddresses[1].IPv4Mask.ToString();
+                    this.self.Hostname = Dns.GetHostName();
+                    break;
                 }
             }
-
-            this.Self = new Player(Dns.GetHostName(), ip, "255.255.255.0");
 
             #endregion
 

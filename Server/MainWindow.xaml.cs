@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace LanPartyUtility.Server
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : MetroWindow
     {
         MainWindowViewModel viewModel;
@@ -28,7 +25,10 @@ namespace LanPartyUtility.Server
             viewModel = new MainWindowViewModel();
             this.Closing += viewModel.OnWindowClosing;
             this.DataContext = viewModel;
+            
             InitializeComponent();
+
+            this.viewModel.Terminal = this.MainTerminal;
         }
 
         private void ShowSettings(object sender, RoutedEventArgs e)
